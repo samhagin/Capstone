@@ -32,6 +32,13 @@ mysql> create database capstone
 ## Import Data
 - run `python3.8 setup.py`. This script imports the initial data ( list of stocks from S&P 500, company meta data, news etc ) into the database. 
 
+## Add MySQL views, triggers and stored procedures
+
+```
+mysql> create view ticker_list as select company.company_id, name, symbol, info_url  from company inner join ticker on company.company_id = ticker.company_id;
+``` 
+
+
 ## Run the application
 `python3.8 app.py` 
 
