@@ -1,5 +1,5 @@
 # Capstone
-This is a default database capstone project that demostrate various uses of SQL. The app is a stock screener built with Flask that connects to a MySQL backend. This app can be accessed by going to http://stockscreener.online or http://165.227.201.84
+This is a default database capstone project that demostrates various uses of SQL. The app is a stock screener built with Flask that connects to a MySQL backend. This app can be accessed by going to http://stockscreener.online or http://165.227.201.84. If you wish to set this up locally or own your own server. Follow the instructions below:
 
 # Requirements
 Python 3.8 and MySQL 8 ( this app may however work with earlier version of MySQL without issues )
@@ -11,6 +11,8 @@ Python 3.8 and MySQL 8 ( this app may however work with earlier version of MySQL
 - pymysql 
 - pandas
 - textblob 
+
+you can also run `pip install -r requirements.txt` to install these packages. 
 
 # Deployment
 To deploy the application, ensure you have MySQL running, then modify dbconnect.py and config.ini to include your database connection details and API key from Polygon.io ( used to fetch stock data )
@@ -35,8 +37,6 @@ mysql> create database capstone
 
 # You can access the application by going to
 
-`127.0.01:5000`
-
-A demo version of this app can be accessed by going to http://stockscreener.online/ 
+`127.0.01:5000` if being accessed locally or substitue `127.0.0.1` with the IP of the server you're running this on
 
 
