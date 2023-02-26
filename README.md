@@ -13,7 +13,7 @@ Python 3.8 and MySQL 8 ( this app may however work with earlier version of MySQL
 - textblob 
 
 # Deployment
-To deploy the application, ensure you have MySQL running, then modify dbconn
+To deploy the application, ensure you have MySQL running, then modify dbconnect.py and config.ini to include your database connection details and API key from Polygon.io ( used to fetch stock data )
 
 
 # Database Setup
@@ -21,3 +21,22 @@ To deploy the application, ensure you have MySQL running, then modify dbconn
 
 ```
 mysql> create database capstone
+``` 
+
+- Import the database schema
+
+`mysql capstone < db.sql` 
+
+# Import Data
+- run `python3.8 setup.py`. This script imports the initial data ( list of stocks from S&P 500, company meta data, news etc ) into the database. 
+
+# Run the application
+`python3.8 app.py` 
+
+# You can access the application by going to
+
+`127.0.01:5000`
+
+A demo version of this app can be accessed by going to http://stockscreener.online/ 
+
+
