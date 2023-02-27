@@ -39,9 +39,20 @@ def index():
         cursor.close()
 
     # check change in price
-    for i in result:
-        url = f'https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers/{ticker}?apiKey={api_key}'
-        
+    # prevDay = day = ''
+    # for i in result:
+    #     ticker = i['symbol']
+    #     print( ticker, flush=True )
+    #     try:
+    #       url = f'https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers/{ticker}?apiKey={api_key}'
+    #       r = requests.get( url )
+    #       # print( r.json(), flush=True )
+    #       prevDay = r.json()['ticker']['prevDay']['c']
+    #       day = r.json()['ticker']['day']['c']
+    #       print( prevDay, day, flush=True )
+    #     except:
+    #         pass
+
     return render_template('index.html', data=result)
 
 @app.route('/ticker/<symbol>')
@@ -53,6 +64,7 @@ def ticket(symbol):
 
     # fetch news
     company_id = ''
+    sentiment = ''
     with connection.cursor() as cursor:
         sql = 'select * from ticker where symbol = %s'
         cursor.execute(sql, symbol )
@@ -62,7 +74,21 @@ def ticket(symbol):
         sql = "select article, article_date, article_link from news where company_id = %s"
         cursor.execute( sql, company_id )
         result = cursor.fetchall()
+        for i in result:
+            url = i['article_link']
+            response = requests.get( url )
+            content = response.text 
+            blob = TextBlob(content)
+            sentiment = blob.sentiment.polarity
+
+            if sentiment > 0:
+               sentiment = 'Positive'
+            elif sentiment < 0:
+               sentiment = 'Negative'
+            else:
+               sentiment = 'Neutral'
         cursor.close()
+
     
 
     # calculate ema crossover
@@ -123,9 +149,6 @@ def ticket(symbol):
         cursor.close()
 
 
-    # fetch earnings
-
-
     # get RSI
     rsi = ''
     url = f'https://api.polygon.io/v1/indicators/rsi/{symbol}?timespan=minute&adjusted=true&window=14&series_type=close&order=desc&limit=1&apiKey={api_key}'
@@ -171,7 +194,7 @@ def ticket(symbol):
 
 
     # Render the template and pass the chart data to it
-    return render_template('ticker.html', recommendation=recommendation, color=color, data=result, ticker=symbol, tv_url=tv_url, exchange=exchange, last_ema13=round(last_ema13,2), last_ema48=round(last_ema48,2), rsi=round(rsi,2), about=about )
+    return render_template('ticker.html', sentiment=sentiment, recommendation=recommendation, color=color, data=result, ticker=symbol, tv_url=tv_url, exchange=exchange, last_ema13=round(last_ema13,2), last_ema48=round(last_ema48,2), rsi=round(rsi,2), about=about )
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -227,4 +250,4 @@ def error(e):
 
 
 if __name__ == '__main__':
-     app.run(debug=True, port=5000, host='0.0.0.0')
+     app.run(debug=True, port=80, host='0.0.0.0')
