@@ -1,0 +1,57 @@
+{% include 'header.html' %} 
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left"> 
+      <h3>Stock Chart</h3>
+      <hr>
+     <div id="chart">
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div id="tradingview_0638e"></div>
+  <div class="tradingview-widget-copyright"><a href="{{ tv_url }}" rel="noopener" target="_blank"><span class="blue-text">{{ ticker }} stock chart</span></a> by TradingView</div>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+  new TradingView.widget(
+  {
+  "width": 800,
+  "height": 610,
+  "symbol": "{{ exchange }}:{{ ticker }}",
+  "interval": "5",
+  "timezone": "Etc/UTC",
+  "theme": "dark",
+  "style": "1",
+  "locale": "en",
+  "toolbar_bg": "#f1f3f6",
+  "enable_publishing": false,
+  "allow_symbol_change": true,
+  "container_id": "tradingview_0638e"
+}
+  );
+  </script>
+</div>
+<!-- TradingView Widget END -->
+</div>
+  <h3>Technical Analysis</h3>
+  <h4><p style="color:{{ color }};">RECOMMENDATION: {{ recommendation }}</p></h4>
+  <b>Last 13 EMA: {{ last_ema13 }}</b><br>
+  <b>Last 48 EMA: {{ last_ema48 }}</b><br>
+  <b>RSI: {{ rsi }}</b><br>
+  <h3>News</h3>
+  {{ data }}
+  <h3>Sentiment</h3>
+   {{ sentiment }}
+  <h3>About {{ ticker }}</h3>
+  {{ about }}
+    </div>
+    <div class="col-sm-2 sidenav">
+    </div>
+  </div>
+</div>
+<br><br>
+<footer class="container-fluid text-center">
+</footer>
+
+</body>
+</html>
