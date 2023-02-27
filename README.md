@@ -27,7 +27,7 @@ mysql> create database capstone
 
 - Import the database schema
 
-`mysql capstone < db.sql` 
+`mysql capstone < database.sql` 
 
 ## Import Data
 - run `python3.8 setup.py`. This script imports the initial data ( list of stocks from S&P 500, company meta data, news etc ) into the database. 
