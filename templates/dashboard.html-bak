@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center">Dashboard</h1>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="card-header">
+              User Information
+            </div>
+            <div class="card-body">
+            {{ data }}
+             </div>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="card">
+            <div class="card-header">
+              Stats
+            </div>
+            <div class="card-body">
+              Total Users: 100<br>
+              Active Users: 50<br>
+              Inactive Users: 50
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

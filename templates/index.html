@@ -1,0 +1,40 @@
+{% include 'header.html' %} 
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left"> 
+      <h1>S&P 500 Stock List</h1>
+      <p>
+         <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Company Name</th>
+        <th scope="col">Symbol</th>
+      </tr>
+     </thead>
+     <tbody>
+      {% for row in data %}
+      <tr>
+        <td>{{ row['company_id'] }}</td>
+        <td>{{ row['name'] }}</td>
+        <td><a href="ticker/{{ row['symbol'] }}">{{ row['symbol'] }}</a></td>
+      </tr>
+      {% endfor %}
+     </tbody>
+    </table>
+      </p>
+      <hr>
+    </div>
+    <div class="col-sm-2 sidenav">
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Footer</p>
+</footer>
+
+</body>
+</html>
